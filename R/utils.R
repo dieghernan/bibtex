@@ -403,3 +403,14 @@ check_balanced_braces <- function(x, line) {
 
   return(map_braces)
 }
+
+replace_latex <- function(x){
+  # Replace characters in curly braces
+
+  chars <- intToUtf8(seq_len(511), multiple = TRUE)
+  latx <- tools::encoded_text_to_latex(chars, encoding = "UTF-8")
+  for (i in seq_len(length(chars))){
+    x <- gsub(latx[i], chars[i], x, fixed = TRUE)
+  }
+  x
+}

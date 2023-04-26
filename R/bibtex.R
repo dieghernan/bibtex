@@ -44,6 +44,9 @@ ArrangeAuthors <- function(x) {
 
 ArrangeSingleAuthor <- function(y) {
   if (grepl("[\\]", y)) {
+
+    y <- replace_latex(y)
+
     tmp <- try(parseLatex(y), TRUE)
     if (!inherits(tmp, "try-error")) {
       y <- deparseLatex(latexToUtf8(tmp))
