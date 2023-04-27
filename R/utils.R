@@ -403,3 +403,34 @@ check_balanced_braces <- function(x, line) {
 
   return(map_braces)
 }
+
+#' Parse LaTeX symbols to UTF-8
+#'
+#' To be used with `parseLatex()`. This function tries to convert latex
+#' characters to UTF-8 equivalents, since `parseLatex()` seems to have changed
+#' among R versions and some characters are not translated any more.
+#'
+#' @param x The string or entry to be evaluated
+#'
+#' @examples
+#' x <- 'Ulrich {\\"{U}}nderwood and Ned {\\~N}et'
+#'
+#' # This translates {\N}
+#' replace_latex(x)
+#'
+#' # This translates {\"{U}}
+#' latexToUtf8(parseLatex(x))
+#'
+#' # Together
+#' latexToUtf8(parseLatex(replace_latex(x)))
+#' @noRd
+replace_latex <- function(x) {
+  # Replace characters in curly braces
+
+  chars <- intToUtf8(seq_len(511), multiple = TRUE)
+  latx <- tools::encoded_text_to_latex(chars, encoding = "UTF-8")
+  for (i in seq_len(length(chars))) {
+    x <- gsub(latx[i], chars[i], x, fixed = TRUE)
+  }
+  x
+}

@@ -1,3 +1,8 @@
+# bibtex (development version)
+
+- Improvements on handling of LateX symbols.
+- Tests have been updated.
+
 # bibtex 0.5.1
 
 ## Bug fix

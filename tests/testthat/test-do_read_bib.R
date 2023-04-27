@@ -9,7 +9,10 @@ test_that("Do read bib", {
     srcfile(file, encoding = encoding)
   )
 
-  f <- do_read_bib(file, encoding = "UTF-8", srcfile = srcfile)
+  expect_message(
+    f <- do_read_bib(file, encoding = "UTF-8", srcfile = srcfile),
+    "'srcfile' argument is deprecated"
+  )
 
   expect_snapshot_output(f[[1]])
 })
@@ -25,7 +28,10 @@ test_that("Do read bib with non standard entries", {
   }"
   writeLines(entry, tmp)
 
-  out <- do_read_bib(tmp, encoding = "UTF-8", srcfile = tmp)
+  expect_message(
+    out <- do_read_bib(tmp, encoding = "UTF-8", srcfile = tmp),
+    "'srcfile' argument is deprecated"
+  )
 
   expect_snapshot_output(out[[1]])
 })
@@ -33,7 +39,9 @@ test_that("Do read bib with non standard entries", {
 
 test_that("do read with several entries", {
   bib <- system.file("bib/xampl_standard.bib", package = "bibtex")
-  out <- do_read_bib(bib, encoding = "UTF-8", srcfile = bib)
-
+  expect_message(
+    out <- do_read_bib(bib, encoding = "UTF-8", srcfile = bib),
+    "'srcfile' argument is deprecated"
+  )
   expect_snapshot_output(lapply(out, print))
 })

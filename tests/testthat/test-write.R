@@ -9,11 +9,11 @@ test_that("Test errors", {
 
 test_that("Test package citation", {
   skip_if_not_installed("testthat")
-  skip_if_not_installed("devtools")
+  skip_if_not_installed("cli")
 
   tmp <- tempfile(fileext = ".bib")
 
-  write.bib(c("testthat", "devtools"), file = tmp)
+  expect_message(write.bib(c("testthat", "cli"), file = tmp))
   l <- read.bib(tmp)
 
   expect_gte(length(l), 2)

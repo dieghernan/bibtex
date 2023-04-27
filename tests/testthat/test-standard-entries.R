@@ -47,7 +47,7 @@ test_that("Test conference-full", {
 
   expect_warning(out["conference-full"])
 
-  entry <- suppressWarnings(out["conference-full"])
+  expect_warning(entry <- out["conference-full"])
 
   expect_length(entry, 0)
 })

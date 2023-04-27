@@ -3,7 +3,7 @@ test_that("Preamble from file", {
 
   out <- read.bib(file)
   class(out) <- c("citation", "bibentry")
-  expect_snapshot_output(out)
+  expect_snapshot_output(toBibtex(out))
 })
 
 

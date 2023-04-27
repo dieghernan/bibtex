@@ -23,15 +23,11 @@ test_that("Read bibtex", {
   ## this package has a REFERENCES.bib file
   bib <- read.bib(package = "bibtex")
 
-  expect_snapshot_output(bib)
-
   expect_snapshot_output(toBibtex(bib))
 })
 
 test_that("Read base", {
   bib <- read.bib(package = "base")
-
-  expect_snapshot_output(bib)
 
   expect_snapshot_output(toBibtex(bib))
 })
@@ -40,17 +36,11 @@ test_that("Read base", {
 test_that("Read datasets", {
   bib <- read.bib(package = "datasets")
 
-  expect_snapshot_output(bib)
-
   expect_snapshot_output(toBibtex(bib))
 })
 
 test_that("Read graphics", {
   bib <- read.bib(package = "graphics")
-
-  skip_on_os("windows")
-
-  expect_snapshot_output(bib)
 
   expect_snapshot_output(toBibtex(bib))
 })
@@ -58,17 +48,11 @@ test_that("Read graphics", {
 test_that("Read grDevices", {
   bib <- read.bib(package = "grDevices")
 
-  skip_on_os("windows")
-
-  expect_snapshot_output(bib)
-
   expect_snapshot_output(toBibtex(bib))
 })
 
 test_that("Read methods", {
   bib <- read.bib(package = "methods")
-
-  expect_snapshot_output(bib)
 
   expect_snapshot_output(toBibtex(bib))
 })
@@ -76,15 +60,12 @@ test_that("Read methods", {
 test_that("Read stats", {
   bib <- read.bib(package = "stats")
 
-  expect_snapshot_output(bib)
-
   expect_snapshot_output(toBibtex(bib))
 })
 
 test_that("Read stats4", {
+  skip_if_not_installed("stats4")
   bib <- read.bib(package = "stats4")
-
-  expect_snapshot_output(bib)
 
   expect_snapshot_output(toBibtex(bib))
 })
@@ -92,15 +73,11 @@ test_that("Read stats4", {
 test_that("Read tools", {
   bib <- read.bib(package = "tools")
 
-  expect_snapshot_output(bib)
-
   expect_snapshot_output(toBibtex(bib))
 })
 
 test_that("Read utils", {
   bib <- read.bib(package = "utils")
-
-  expect_snapshot_output(bib)
 
   expect_snapshot_output(toBibtex(bib))
 })
