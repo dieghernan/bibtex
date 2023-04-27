@@ -108,7 +108,6 @@ test_that("caught segfault read.bib() - macOS 10.14.6 #23", {
 
 
 test_that("Parse single entry from string #35", {
-
   # This test is about not reading from a file, but from a string
   my_ref <- " @book{McElreath_2020, edition={2},
    title={Statistical Rethinking: A Bayesian Course with Examples in R and Stan}, ISBN={978-0-429-02960-8},

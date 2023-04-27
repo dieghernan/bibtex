@@ -5,7 +5,7 @@ test_that("arrange.single.author does not add extra trailing space in given name
 
 test_that("read.bib Ignores entry but does not stop with invalid author/editor (#12)", {
   f <- file.path(system.file("bib", "badFormat.bib", package = "bibtex"))
-  bib <- read.bib(f)
+  expect_message(expect_message(bib <- read.bib(f), "ignoring entry"), "ignoring entry")
   expect_true(length(bib) == 1L)
 })
 
