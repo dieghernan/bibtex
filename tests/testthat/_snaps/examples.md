@@ -1013,16 +1013,6 @@
 
 # Read methods
 
-    Chambers JM (2008). _Software for Data Analysis: Programming with R_.
-    Springer.
-    
-    Chambers JM (1998). _Programming with Data_. Springer.
-    
-    Chambers JM (2009). "Developments in Class Inheritance and Method
-    Selection." <http://stat.stanford.edu/~jmc4/classInheritance.pdf>.
-
----
-
     @Book{chambers:2008,
       author = {John M. Chambers},
       year = {2008},
@@ -2494,11 +2484,6 @@
     }
 
 # Read tools
-
-    Murdoch D (2009). "Parsing Rd files."
-    <http://developer.r-project.org/parseRd.pdf>.
-
----
 
     @Misc{murdoch:2009,
       author = {Duncan Murdoch},

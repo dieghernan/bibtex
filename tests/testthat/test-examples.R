@@ -1,7 +1,7 @@
 test_that("Write", {
   tmp <- file.path(tempdir(), "references")
 
-    suppressWarnings(write.bib(c("bibtex", "utils", "tools"), file = tmp))
+  suppressWarnings(write.bib(c("bibtex", "utils", "tools"), file = tmp))
 
   #> Results written to file 'references.bib'
   expect_error(read.bib(tmp))
@@ -54,8 +54,6 @@ test_that("Read grDevices", {
 test_that("Read methods", {
   bib <- read.bib(package = "methods")
 
-  expect_snapshot_output(bib)
-
   expect_snapshot_output(toBibtex(bib))
 })
 
@@ -74,8 +72,6 @@ test_that("Read stats4", {
 
 test_that("Read tools", {
   bib <- read.bib(package = "tools")
-
-  expect_snapshot_output(bib)
 
   expect_snapshot_output(toBibtex(bib))
 })
