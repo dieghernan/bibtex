@@ -31,7 +31,7 @@ contains bibtex entries for these packages.}
 }
 \value{
 An object of class \code{"bibentry"}, similar to those obtained by the
-       \code{\link[utils]{bibentry}} function.
+\code{\link[utils:bibentry]{utils::bibentry()}} function.
 }
 \description{
 Parser for bibliography databases written in the bib format.
@@ -56,5 +56,6 @@ bib <- read.bib(package = "utils")
 }
 }
 \references{
-Nelson H. F. Beebe. bibparse 1.04. 1999. \url{http://www.math.utah.edu/~beebe/}
+Nelson H. F. Beebe. bibparse 1.04. 1999.
+\url{http://www.math.utah.edu/~beebe/}
 }

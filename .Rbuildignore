@@ -14,3 +14,16 @@ revdep
 ^bibtex\.Rcheck$
 ^bibtex.*\.tar\.gz$
 ^bibtex.*\.tgz$
+^revdep$
+^codemeta\.json$
+^CITATION\.cff$
+^CRAN-SUBMISSION$
+^pkgdown\.yaml$
+^pkgdown\.yml$
+^_pkgdown\.yaml$
+^codecov\.yml$
+^\.imgbotconfig$
+^\.lintr$
+^CODE_OF_CONDUCT\.md$
+^CONTRIBUTING\.md$
+^Rplots\.pdf$

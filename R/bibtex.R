@@ -52,7 +52,6 @@ ArrangeSingleAuthor <- function(y) {
   parts <- unlist(strsplit(y, ", ?(?![^{}]*})", perl = TRUE))
   len.parts <- length(parts)
   if (len.parts == 1L) {
-    #     parts <- "{Barnes} {and} {Noble,} {Inc.}"
     if (grepl("[^{][[:print:]][}]$", parts)) {
       s <- unlist(strsplit(parts, ""))
       i <- length(s) - 1L
@@ -80,7 +79,10 @@ ArrangeSingleAuthor <- function(y) {
         if (length(name) == 1L) { # von Bommel
           person(family = c(cleanupLatex(von), cleanupLatex(name)))
         } else { # Mark von Bommel
-          person(given = UnlistSplitClean(name[1L]), family = c(cleanupLatex(von), cleanupLatex(name[2L])))
+          person(
+            given = UnlistSplitClean(name[1L]),
+            family = c(cleanupLatex(von), cleanupLatex(name[2L]))
+          )
         }
       } else { # George Bernard Shaw
         name <- UnlistSplitClean(parts)
@@ -102,7 +104,10 @@ ArrangeSingleAuthor <- function(y) {
       if (is.na(von)) { # e.g. Smith, John Paul
         person(UnlistSplitClean(parts[2L]), cleanupLatex(parts[1L]))
       } else { # e.g. de la Soul, John
-        person(UnlistSplitClean(parts[2L]), c(cleanupLatex(von), cleanupLatex(sub(vonrx, "", parts[1L]))))
+        person(
+          UnlistSplitClean(parts[2L]),
+          c(cleanupLatex(von), cleanupLatex(sub(vonrx, "", parts[1L])))
+        )
       }
     }
   } else if (len.parts == 3L) {
@@ -110,11 +115,17 @@ ArrangeSingleAuthor <- function(y) {
     m <- regexec(vonrx, parts[1L])
     von <- unlist(regmatches(parts[1L], m))[2]
     if (is.na(von)) { # e.g. White, Jr., Walter
-      person(UnlistSplitClean(parts[3L]), c(cleanupLatex(parts[1L]), cleanupLatex(parts[2L])))
+      person(
+        UnlistSplitClean(parts[3L]),
+        c(cleanupLatex(parts[1L]), cleanupLatex(parts[2L]))
+      )
     } else { # e.g. des White, Jr., Walter
       person(
         UnlistSplitClean(parts[3L]),
-        c(cleanupLatex(von), cleanupLatex(sub(vonrx, "", parts[1L])), cleanupLatex(parts[2L]))
+        c(
+          cleanupLatex(von),
+          cleanupLatex(sub(vonrx, "", parts[1L])), cleanupLatex(parts[2L])
+        )
       )
     }
   } else {
@@ -195,12 +206,12 @@ findBibFile <- function(package) {
 #' convenience wrapper around .External call
 #'
 #' This is a convenience function for packages that do need to call the internal
-#' functionality of \code{\link{read.bib}} but does different processing. This is
-#' a simple wrapper around the \code{.External} code used by \code{\link{read.bib}}
+#' functionality of [read.bib()] but does different processing. This is
+#' a simple wrapper around the `.External` code used by [read.bib()]
 #'
 #' The parser is greatly inspired from the \samp{bibparse} library.
 #'
-#' @seealso \code{\link[utils]{bibentry}}
+#' @seealso [utils::bibentry()]
 #'
 #' @param file file name
 #' @param encoding encoding
@@ -303,9 +314,9 @@ do_read_bib <- function(file, encoding = "unknown", srcfile) {
 #'
 #' @param file bib file to parse.  By default, the file
 #'         \file{REFERENCES.bib} in the root directory of the package given by
-#'         the \code{package} argument is used.
+#'         the `package` argument is used.
 #' @param package package from which we want to read the bibliography.
-#'         Only used if \code{file} is unspecified.
+#'         Only used if `file` is unspecified.
 #'         Core R packages (base, datasets, graphics, grDevices, methods,
 #'         stats, stats4, tools and utils) are treated specially: this package
 #'         contains bibtex entries for these packages.
@@ -313,10 +324,11 @@ do_read_bib <- function(file, encoding = "unknown", srcfile) {
 #' @param header DEPRECATED.
 #' @param footer DEPRECATED
 #'
-#' @return An object of class \code{"bibentry"}, similar to those obtained by the
-#'        \code{\link[utils]{bibentry}} function.
+#' @return An object of class `"bibentry"`, similar to those obtained by the
+#'        [utils::bibentry()] function.
 #'
-#' @references Nelson H. F. Beebe. bibparse 1.04. 1999. \url{http://www.math.utah.edu/~beebe/}
+#' @references Nelson H. F. Beebe. bibparse 1.04. 1999.
+#' <http://www.math.utah.edu/~beebe/>
 #'
 #' @examples
 #' ## this package has a REFERENCES.bib file
@@ -350,30 +362,33 @@ read.bib <- function(file = findBibFile(package),
     message("'footer' argument is deprecated.")
   }
   if (!is.character(file)) {
-    stop("'read.bib' only supports reading from files, 'file' should be a character vector of length one")
+    stop(
+      paste0(
+        "'read.bib' only supports reading from files, 'file' ",
+        "should be a character vector of length one"
+      )
+    )
   }
 
-  out <- tryCatch(do_read_bib(
-    file = file,
-    encoding = encoding
-  ),
-  error = function(e) {
-    stop("Invalid bib file", call. = FALSE)
-  }, warning = function(w) {
-    if (any(grepl("syntax error, unexpected [$]end", w))) {
-      NULL
+  out <- tryCatch(
+    do_read_bib(
+      file = file,
+      encoding = encoding
+    ),
+    error = function(e) {
+      stop("Invalid bib file", call. = FALSE)
+    }, warning = function(w) {
+      if (any(grepl("syntax error, unexpected [$]end", w))) {
+        NULL
+      }
     }
-  }
   )
-  # keys <- lapply(out, function(x) attr(x, 'key'))
   at <- attributes(out)
   if ((typeof(out) != "integer") || (getRversion() < "3.0.0")) {
     out <- lapply(out, make.bib.entry)
   } else {
     out <- list()
   }
-  preamble <- at[["preamble"]]
-
   out <- make.citation.list(out)
   attr(out, "strings") <- at[["strings"]]
   names(out) <- unlist(out$key)
@@ -382,22 +397,22 @@ read.bib <- function(file = findBibFile(package),
 
 #' Generate a Bibtex File from Package Citations
 #'
-#' Generates a Bibtex file from a list of packages or all the installed packages.
-#' It is useful for adding relevant citations in Sweave documents.
+#' Generates a Bibtex file from a list of packages or all the installed
+#' packages. It is useful for adding relevant citations in Sweave documents.
 #'
-#' @param entry a \code{\link{bibentry}} object or a character vector of package
-#' names. If \code{NULL}, then the list of all installed packages is used.
+#' @param entry a [bibentry()] object or a character vector of package
+#' names. If `NULL`, then the list of all installed packages is used.
 #' @param file output Bibtex file.
 #' @param verbose a logical to toggle verbosity.
-#' @param append logical. If \code{TRUE} content is appended to the file.
+#' @param append logical. If `TRUE` content is appended to the file.
 #'
 #' @return the list of Bibtex objects -- invisibly.
 #' @author
-#' Renaud Gaujoux, based on the function \code{Rpackages.bib}
-#' from Achim Zeileis (see \emph{References}).
+#' Renaud Gaujoux, based on the function `Rpackages.bib`
+#' from Achim Zeileis (see *References*).
 #'
 #' @references
-#' \emph{[R] Creating bibtex file of all installed packages?}
+#' *[R] Creating bibtex file of all installed packages?*
 #' Achim Zeileis. R-help mailing list.
 #'
 #' @export
@@ -412,7 +427,8 @@ read.bib <- function(file = findBibFile(package),
 #' \dontshow{
 #' unlink(c("references.bib", "references2.bib"))
 #' }
-write.bib <- function(entry, file = "Rpackages.bib", append = FALSE, verbose = TRUE) {
+write.bib <- function(entry, file = "Rpackages.bib",
+                      append = FALSE, verbose = TRUE) {
   bibs <-
     if (inherits(entry, "bibentry")) {
       entry
@@ -426,7 +442,6 @@ write.bib <- function(entry, file = "Rpackages.bib", append = FALSE, verbose = T
         pkgs <- unique(installed.packages()[, 1])
       }
       bibs <- sapply(pkgs, function(x) try(citation(x)), simplify = FALSE)
-      # bibs <- lapply(pkgs, function(x) try(toBibtex(citation(x))))
       n.installed <- length(bibs)
 
       ## omit failed citation calls
@@ -438,7 +453,7 @@ write.bib <- function(entry, file = "Rpackages.bib", append = FALSE, verbose = T
       ## add bibtex keys to each entry
       pkgs <- lapply(seq_along(pkgs), function(i) {
         if (length(bibs[[i]]) > 1) {
-          paste(pkgs[i], 1:length(bibs[[i]]), sep = "")
+          paste(pkgs[i], seq_len(length(bibs[[i]])), sep = "")
         } else {
           pkgs[i]
         }
@@ -447,20 +462,19 @@ write.bib <- function(entry, file = "Rpackages.bib", append = FALSE, verbose = T
       bibs <- do.call("c", bibs)
       # formatting function for bibtex keys:
       # names with special characters must be enclosed in {}, others not.
-      as.bibkey <- function(x) {
-        i <- grep("[.]", x)
-        if (length(i) > 0) {
-          x[i] <- paste("{", x[i], "}", sep = "")
-        }
-        x
-      }
       bibs <- mapply(function(b, k) {
         b$key <- k
         b
       }, bibs, pkgs, SIMPLIFY = FALSE)
       bibs <- do.call("c", bibs)
 
-      if (verbose) message("Converted ", n.converted, " of ", n.installed, " package citations to BibTeX")
+      if (verbose) {
+        message(
+          "Converted ",
+          n.converted, " of ", n.installed,
+          " package citations to BibTeX"
+        )
+      }
       bibs
     } else {
       stop("Invalid argument 'entry': expected a bibentry object or a character vector of package names.")
@@ -482,7 +496,12 @@ write.bib <- function(entry, file = "Rpackages.bib", append = FALSE, verbose = T
 
   fh <- file(file, open = if (append) "a+" else "w+")
   on.exit(if (isOpen(fh)) close(fh))
-  if (verbose) message("Writing ", length(bibs), " Bibtex entries ... ", appendLF = FALSE)
+  if (verbose) {
+    message("Writing ", length(bibs),
+      " Bibtex entries ... ",
+      appendLF = FALSE
+    )
+  }
   writeLines(toBibtex(bibs), fh)
   # writeLines(do.call("c", lapply(bibs, as.character)), fh)
   if (verbose) message("OK\nResults written to file '", file, "'")

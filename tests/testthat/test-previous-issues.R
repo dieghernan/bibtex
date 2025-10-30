@@ -52,12 +52,14 @@ test_that("read.bib can use ? in key #9", {
   expect_identical(names(out2), "key?")
 })
 
-test_that("read.bib Ignores entry but does not stop with invalid author/editor #12", {
-  f <- file.path(system.file("bib", "badFormat.bib", package = "bibtex"))
-  bib <- read.bib(f)
-  expect_true(length(bib) == 1L)
-})
-
+test_that(
+  "read.bib Ignores entry but does not stop with invalid author/editor #12",
+  {
+    f <- file.path(system.file("bib", "badFormat.bib", package = "bibtex"))
+    bib <- read.bib(f)
+    expect_true(length(bib) == 1L)
+  }
+)
 
 
 test_that("make.bib.entry can generate year from date #15", {
@@ -108,7 +110,6 @@ test_that("caught segfault read.bib() - macOS 10.14.6 #23", {
 
 
 test_that("Parse single entry from string #35", {
-
   # This test is about not reading from a file, but from a string
   my_ref <- " @book{McElreath_2020, edition={2},
    title={Statistical Rethinking: A Bayesian Course with Examples in R and Stan}, ISBN={978-0-429-02960-8},

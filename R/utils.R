@@ -36,7 +36,6 @@
 #' @noRd
 parse_strings <- function(map_string,
                           stringlines) {
-
   # This needs to be done in a loop, since strings can depend also
   # on values of previous strings
 
@@ -89,7 +88,6 @@ parse_strings <- function(map_string,
     return(init)
   }
   for (j in seq(2, nrow(parsed_string))) {
-
     # Search if need to replace and concat
     row <- parsed_string[j, ]
 
@@ -104,7 +102,7 @@ parse_strings <- function(map_string,
     init <- rbind(init, row)
   }
 
-  return(init)
+  init
 }
 
 #' Parse a single entry
@@ -120,7 +118,7 @@ parse_strings <- function(map_string,
 #' @param end Number of line where the entry ends
 #' @param lines The content of the .bib file to be parsed, `init` and `end`
 #'   are used to select the corresponding lines
-#' @param map_string_end The output of [parse_strings()] or `NULL`.
+#' @param map_string_end The output of `parse_strings()` or `NULL`.
 #'
 #'
 #' @examples
@@ -245,7 +243,7 @@ parse_single_entry <- function(init, end, lines, map_string_end) {
   attr(field_value, "key") <- key_name
   attr(field_value, "srcref") <- seq(init, end)
 
-  return(field_value)
+  field_value
 }
 
 
@@ -286,7 +284,6 @@ parse_single_entry <- function(init, end, lines, map_string_end) {
 #' x4 <- "{CIA}"
 #' replace_string_and_concat(x3, string, value)
 replace_string_and_concat <- function(x, string_names, string_values) {
-
   # As characters instead of factors
   string_names <- as.character(string_names)
   string_values <- as.character(string_values)
@@ -301,7 +298,7 @@ replace_string_and_concat <- function(x, string_names, string_values) {
   if (tolower(x) %in% tolower(string_names)) {
     # Case of full replacement
     index <- match(tolower(x), tolower(string_names))
-    return(paste0("\"", string_values[index], "\""))
+    paste0("\"", string_values[index], "\"")
   } else if (grepl(" # ", x)) {
     # Hardest case, replace and concat
     parts <- unlist(strsplit(x, " # "))
@@ -318,9 +315,9 @@ replace_string_and_concat <- function(x, string_names, string_values) {
     # Flatten and clean
     newval <- paste(trimws(parts, "both", "\""), collapse = "")
 
-    return(trimws(newval))
+    trimws(newval)
   } else {
-    return(x)
+    x
   }
 }
 
@@ -401,5 +398,5 @@ check_balanced_braces <- function(x, line) {
     stop()
   }
 
-  return(map_braces)
+  map_braces
 }

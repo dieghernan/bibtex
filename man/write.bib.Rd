@@ -7,7 +7,7 @@
 write.bib(entry, file = "Rpackages.bib", append = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{entry}{a \code{\link{bibentry}} object or a character vector of package
+\item{entry}{a \code{\link[=bibentry]{bibentry()}} object or a character vector of package
 names. If \code{NULL}, then the list of all installed packages is used.}
 
 \item{file}{output Bibtex file.}
@@ -20,8 +20,8 @@ names. If \code{NULL}, then the list of all installed packages is used.}
 the list of Bibtex objects -- invisibly.
 }
 \description{
-Generates a Bibtex file from a list of packages or all the installed packages.
-It is useful for adding relevant citations in Sweave documents.
+Generates a Bibtex file from a list of packages or all the installed
+packages. It is useful for adding relevant citations in Sweave documents.
 }
 \examples{
 
@@ -36,7 +36,7 @@ unlink(c("references.bib", "references2.bib"))
 }
 }
 \references{
-\emph{[R] Creating bibtex file of all installed packages?}
+\emph{\link{R} Creating bibtex file of all installed packages?}
 Achim Zeileis. R-help mailing list.
 }
 \author{

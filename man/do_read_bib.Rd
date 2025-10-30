@@ -15,12 +15,12 @@ do_read_bib(file, encoding = "unknown", srcfile)
 }
 \description{
 This is a convenience function for packages that do need to call the internal
-functionality of \code{\link{read.bib}} but does different processing. This is
-a simple wrapper around the \code{.External} code used by \code{\link{read.bib}}
+functionality of \code{\link[=read.bib]{read.bib()}} but does different processing. This is
+a simple wrapper around the \code{.External} code used by \code{\link[=read.bib]{read.bib()}}
 }
 \details{
 The parser is greatly inspired from the \samp{bibparse} library.
 }
 \seealso{
-\code{\link[utils]{bibentry}}
+\code{\link[utils:bibentry]{utils::bibentry()}}
 }
