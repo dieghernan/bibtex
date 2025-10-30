@@ -1,29 +1,32 @@
 # Platform
 
-|field    |value                                    |
-|:--------|:----------------------------------------|
-|version  |R version 4.2.1 (2022-06-23 ucrt)        |
-|os       |Windows 10 x64 (build 22000)             |
-|system   |x86_64, mingw32                          |
-|ui       |RStudio                                  |
-|language |(EN)                                     |
-|collate  |Spanish_Spain.utf8                       |
-|ctype    |Spanish_Spain.utf8                       |
-|tz       |Europe/Paris                             |
-|date     |2022-09-16                               |
-|rstudio  |2022.02.2+485 Prairie Trillium (desktop) |
-|pandoc   |2.13 @ C:\PROGRA~1\Pandoc\pandoc.exe     |
+|field    |value                                                  |
+|:--------|:------------------------------------------------------|
+|version  |R version 4.5.1 (2025-06-13)                           |
+|os       |Ubuntu 24.04.3 LTS                                     |
+|system   |x86_64, linux-gnu                                      |
+|ui       |X11                                                    |
+|language |(EN)                                                   |
+|collate  |C.UTF-8                                                |
+|ctype    |C.UTF-8                                                |
+|tz       |UTC                                                    |
+|date     |2025-10-30                                             |
+|pandoc   |3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/pandoc |
+|quarto   |NA                                                     |
 
 # Dependencies
 
-|package   |old     |new   |Δ  |
-|:---------|:-------|:-----|:--|
-|bibtex    |0.4.2.3 |0.5.0 |*  |
-|backports |NA      |1.4.1 |*  |
-|glue      |1.6.2   |NA    |*  |
-|magrittr  |2.0.3   |NA    |*  |
-|stringi   |1.7.8   |NA    |*  |
-|stringr   |1.4.1   |NA    |*  |
+|package   |old   |new   |Δ  |
+|:---------|:-----|:-----|:--|
+|bibtex    |0.5.1 |0.5.1 |NA |
+|backports |1.5.0 |1.5.0 |NA |
 
 # Revdeps
+
+## Failed to check (2)
+
+|package     |version |error |warning |note |
+|:-----------|:-------|:-----|:-------|:----|
+|ChemmineR   |3.60.0  |1     |        |     |
+|scRNAseqApp |?       |      |        |     |
 
