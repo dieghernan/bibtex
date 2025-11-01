@@ -436,7 +436,7 @@ read.bib <- function(
 #' from Achim Zeileis (see *References*).
 #'
 #' @references
-#' *[R] Creating bibtex file of all installed packages?*
+#' *\[R\] Creating bibtex file of all installed packages?*
 #' Achim Zeileis. R-help mailing list.
 #'
 #' @export

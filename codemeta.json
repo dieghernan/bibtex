@@ -127,7 +127,7 @@
     "SystemRequirements": null
   },
   "keywords": ["bibtex", "parser", "r"],
-  "fileSize": "333.856KB",
+  "fileSize": "333.228KB",
   "releaseNotes": "https://github.com/ropensci/bibtex/blob/main/NEWS.md",
   "readme": "https://github.com/ropensci/bibtex/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/bibtex/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/bibtex/branch/master"]
