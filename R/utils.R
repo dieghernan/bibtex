@@ -34,8 +34,7 @@
 #'
 #' parse_strings(map_string, stringlines)
 #' @noRd
-parse_strings <- function(map_string,
-                          stringlines) {
+parse_strings <- function(map_string, stringlines) {
   # This needs to be done in a loop, since strings can depend also
   # on values of previous strings
 
@@ -53,7 +52,8 @@ parse_strings <- function(map_string,
     last_bracket_position <- min(map_braces[map_braces$cum_flag == 0, ]$pos)
 
     singleline <- trimws(substr(
-      singleline, first_bracket_position,
+      singleline,
+      first_bracket_position,
       last_bracket_position
     ))
 
@@ -167,16 +167,15 @@ parse_single_entry <- function(init, end, lines, map_string_end) {
   # fields. This improve the regex matching pattern
 
   cleaned_entry_sub <-
-    gsub("(?<=[[:alnum:]])_|(?<=[[:alnum:]])-|(?<=[[:alnum:]]):", "x",
+    gsub(
+      "(?<=[[:alnum:]])_|(?<=[[:alnum:]])-|(?<=[[:alnum:]]):",
+      "x",
       cleaned_entry,
       perl = TRUE
     )
 
   # Protect commas on brackets to avoid error on splitting
-  protected <- gsub(",(?![^\\}]*(\\{|$))", "|",
-    cleaned_entry_sub,
-    perl = TRUE
-  )
+  protected <- gsub(",(?![^\\}]*(\\{|$))", "|", cleaned_entry_sub, perl = TRUE)
 
   posfields <- unlist(gregexpr(",\\s*\\w+\\s*=", protected))
   # Add init and last pos
@@ -205,24 +204,27 @@ parse_single_entry <- function(init, end, lines, map_string_end) {
 
   fields <- formatted_bib[-1]
 
-  treat_fields <- vapply(seq_along(fields), function(x) {
-    string <- fields[x]
-    equalsign <- grep("=", strsplit(string, "")[[1]])
-    field_name <- trimws(substr(string, 1, equalsign - 1))
-    field_value <- trimws(substr(string, equalsign + 1, nchar(string)))
+  treat_fields <- vapply(
+    seq_along(fields),
+    function(x) {
+      string <- fields[x]
+      equalsign <- grep("=", strsplit(string, "")[[1]])
+      field_name <- trimws(substr(string, 1, equalsign - 1))
+      field_value <- trimws(substr(string, equalsign + 1, nchar(string)))
 
-    c(field_name, field_value)
-  },
-  FUN.VALUE = character(2)
+      c(field_name, field_value)
+    },
+    FUN.VALUE = character(2)
   )
 
   field_names <- trimws(treat_fields[1, ])
   field_value <- trimws(treat_fields[2, ])
 
-
   # Try hard to replace with string values
 
-  field_value <- lapply(field_value, replace_string_and_concat,
+  field_value <- lapply(
+    field_value,
+    replace_string_and_concat,
     string_names = map_string_end$name_string,
     string_values = map_string_end$value
   )
@@ -234,7 +236,6 @@ parse_single_entry <- function(init, end, lines, map_string_end) {
 
   # Lead/trailing quotes
   field_value <- gsub("^\"|\"$", "", field_value)
-
 
   # Build final object
 

@@ -1,0 +1,74 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "bibtex" in publications use:'
+type: software
+license: GPL-2.0-or-later
+title: 'bibtex: Bibtex Parser'
+version: 0.5.1
+doi: 10.32614/CRAN.package.bibtex
+abstract: Utility to parse a bibtex file.
+authors:
+- family-names: Francois
+  given-names: Romain
+  email: romain@purrple.cat
+  orcid: https://orcid.org/0000-0002-2444-4226
+- family-names: Balamuta
+  given-names: James Joseph
+  email: balamut2@illinois.edu
+  orcid: https://orcid.org/0000-0003-2826-8458
+- family-names: Hernangómez
+  given-names: Diego
+  email: diego.hernangomezherrero@gmail.com
+  orcid: https://orcid.org/0000-0001-8457-4658
+repository: https://CRAN.R-project.org/package=bibtex
+repository-code: https://github.com/ropensci/bibtex
+url: https://docs.ropensci.org/bibtex/
+contact:
+- family-names: Balamuta
+  given-names: James Joseph
+  email: balamut2@illinois.edu
+  orcid: https://orcid.org/0000-0003-2826-8458
+keywords:
+- bibtex
+- parser
+- r
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+  version: '>= 4.0.0'
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2025'
+  doi: 10.32614/CRAN.package.testthat
+  version: '>= 3.0.0'
+

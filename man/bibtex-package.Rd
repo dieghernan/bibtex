@@ -6,6 +6,8 @@
 \alias{bibtex-package}
 \title{bibtex: Bibtex Parser}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Utility to parse a bibtex file.
 }
 \seealso{

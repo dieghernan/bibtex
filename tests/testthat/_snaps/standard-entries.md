@@ -1,5 +1,14 @@
 # Test article-full
 
+    Code
+      s <- read.bib(bib)
+    Message
+      ignoring entry 'conference-full' (line 43) because :
+      	'bibtype' has to be one of Article, Book, Booklet, InBook, InCollection, InProceedings, Manual, MastersThesis, Misc, PhdThesis, Proceedings, TechReport, Unpublished
+      
+
+---
+
     @Article{article-full,
       author = {L[eslie] A. Aamport},
       title = {The Gnats and Gnus Document Preparation System},

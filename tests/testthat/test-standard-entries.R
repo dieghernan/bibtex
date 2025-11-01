@@ -2,18 +2,12 @@
 
 test_that("Test article-full", {
   bib <- system.file("bib/xampl_message.bib", package = "bibtex")
+  skip_on_cran()
+  expect_snapshot(s <- read.bib(bib))
 
-  s <- expect_message(read.bib(bib))
+  expect_length(s, 3)
 
-  exp_mes <- "ignoring entry 'conference-full' (line 43) because :\n\t'bibtype' has to be one of Article, Book, Booklet, InBook, InCollection, InProceedings, Manual, MastersThesis, Misc, PhdThesis, Proceedings, TechReport, Unpublished\n\n"
-
-  expect_equal(s$message, exp_mes)
-
-  out <- read.bib(bib)
-
-  expect_length(out, 3)
-
-  entry <- out["article-full"]
+  entry <- s["article-full"]
 
   expect_snapshot_output(toBibtex(entry))
 })

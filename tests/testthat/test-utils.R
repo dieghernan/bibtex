@@ -3,13 +3,11 @@ test_that("parse strings", {
     entry = c("@STRING", "@STRING", "@STRING")
   )
 
-
   stringlines <- c(
     "@STRING{STOC-key = \"OX{\\singleletter{stoc}}\"}",
     "@STRING{ACM = \"The OX Association for Computing Machinery\"}",
     "@STRING{STOC = ACM # \" Symposium on the Theory of Computing\"}"
   )
-
 
   expect_snapshot_output(
     dput(
@@ -47,7 +45,6 @@ test_that("replace and concat", {
     replace_string_and_concat(x_alt, string, value)
   )
 
-
   # Full replacement
   x2 <- "CIA"
   expect_snapshot_output(
@@ -80,7 +77,6 @@ test_that("Check balanced braces", {
     err$message,
     "Error: Unbalanced braces on entry (line 3). Invalid .bib file\n"
   )
-
 
   ok <- paste0(
     "@misc{murdoch:2010, author = {Duncan Murdoch}",

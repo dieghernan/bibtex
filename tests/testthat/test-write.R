@@ -34,7 +34,8 @@ test_that("Test append", {
 
   # Add one citation
 
-  mock <- bibentry("Misc",
+  mock <- bibentry(
+    "Misc",
     title = "Mock citation",
     author = "Mock author",
     key = "mock"
@@ -45,7 +46,6 @@ test_that("Test append", {
   l2 <- read.bib(tmp)
 
   expect_length(l2, 2)
-
 
   # Overwrite
   expect_silent(write.bib(mock, file = tmp, append = FALSE, verbose = FALSE))

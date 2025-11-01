@@ -1,9 +1,9 @@
-UnlistSplitClean <- function(s) {
+unlist_split_clean <- function(s) {
   unlist(strsplit(gsub("[{}]", "", trimws(s)), " "))
 }
 
 #' @importFrom tools deparseLatex latexToUtf8 parseLatex
-cleanupLatex <- function(x) {
+cleanup_latex <- function(x) {
   if (!length(x)) {
     return(x)
   }
@@ -35,14 +35,14 @@ cleanupLatex <- function(x) {
   }
 }
 
-ArrangeAuthors <- function(x) {
+arrange_authors <- function(x) {
   rx <- "(?i)[[:space:]]+and[[:space:]]+"
   x <- gsub("[[:space:]]{2,}", " ", x, useBytes = TRUE)
-  authors <- lapply(strsplit(x, rx, perl = TRUE)[[1]], ArrangeSingleAuthor)
+  authors <- lapply(strsplit(x, rx, perl = TRUE)[[1]], arrange_single_author)
   do.call("c", authors)
 }
 
-ArrangeSingleAuthor <- function(y) {
+arrange_single_author <- function(y) {
   if (grepl("[\\]", y)) {
     tmp <- try(parseLatex(y), TRUE)
     if (!inherits(tmp, "try-error")) {
@@ -69,23 +69,26 @@ ArrangeSingleAuthor <- function(y) {
       if (i > 0) {
         first <- paste0(s[seq_len(i - 1)], collapse = "")
       }
-      person(UnlistSplitClean(first), cleanupLatex(last)) # Mathew {McLean IX}
+      person(unlist_split_clean(first), cleanup_latex(last)) # Mathew {McLean IX}
     } else {
       vonrx <- "(^|[[:space:]])([[:lower:]+[:space:]?]+)[[:space:]]"
       m <- regexec(vonrx, parts)
       von <- unlist(regmatches(parts, m))[3L]
       if (!is.na(von)) {
         name <- unlist(strsplit(parts, vonrx))
-        if (length(name) == 1L) { # von Bommel
-          person(family = c(cleanupLatex(von), cleanupLatex(name)))
-        } else { # Mark von Bommel
+        if (length(name) == 1L) {
+          # von Bommel
+          person(family = c(cleanup_latex(von), cleanup_latex(name)))
+        } else {
+          # Mark von Bommel
           person(
-            given = UnlistSplitClean(name[1L]),
-            family = c(cleanupLatex(von), cleanupLatex(name[2L]))
+            given = unlist_split_clean(name[1L]),
+            family = c(cleanup_latex(von), cleanup_latex(name[2L]))
           )
         }
-      } else { # George Bernard Shaw
-        name <- UnlistSplitClean(parts)
+      } else {
+        # George Bernard Shaw
+        name <- unlist_split_clean(parts)
         len.name <- length(name)
         if (len.name <= 1L) {
           person(family = name)
@@ -95,18 +98,21 @@ ArrangeSingleAuthor <- function(y) {
       }
     }
   } else if (len.parts == 2L) {
-    if (grepl("^[{]", parts[1L])) { # e.g. {de Gama}, Vasco
-      person(UnlistSplitClean(parts[2L]), UnlistSplitClean(parts[1L]))
+    if (grepl("^[{]", parts[1L])) {
+      # e.g. {de Gama}, Vasco
+      person(unlist_split_clean(parts[2L]), unlist_split_clean(parts[1L]))
     } else {
       vonrx <- "^([[:lower:]+[:space:]?]+)[[:space:]]"
       m <- regexec(vonrx, parts[1L])
       von <- unlist(regmatches(parts[1L], m))[2]
-      if (is.na(von)) { # e.g. Smith, John Paul
-        person(UnlistSplitClean(parts[2L]), cleanupLatex(parts[1L]))
-      } else { # e.g. de la Soul, John
+      if (is.na(von)) {
+        # e.g. Smith, John Paul
+        person(unlist_split_clean(parts[2L]), cleanup_latex(parts[1L]))
+      } else {
+        # e.g. de la Soul, John
         person(
-          UnlistSplitClean(parts[2L]),
-          c(cleanupLatex(von), cleanupLatex(sub(vonrx, "", parts[1L])))
+          unlist_split_clean(parts[2L]),
+          c(cleanup_latex(von), cleanup_latex(sub(vonrx, "", parts[1L])))
         )
       }
     }
@@ -114,17 +120,20 @@ ArrangeSingleAuthor <- function(y) {
     vonrx <- "^([[:lower:]+[:space:]?]+)[[:space:]]"
     m <- regexec(vonrx, parts[1L])
     von <- unlist(regmatches(parts[1L], m))[2]
-    if (is.na(von)) { # e.g. White, Jr., Walter
+    if (is.na(von)) {
+      # e.g. White, Jr., Walter
       person(
-        UnlistSplitClean(parts[3L]),
-        c(cleanupLatex(parts[1L]), cleanupLatex(parts[2L]))
+        unlist_split_clean(parts[3L]),
+        c(cleanup_latex(parts[1L]), cleanup_latex(parts[2L]))
       )
-    } else { # e.g. des White, Jr., Walter
+    } else {
+      # e.g. des White, Jr., Walter
       person(
-        UnlistSplitClean(parts[3L]),
+        unlist_split_clean(parts[3L]),
         c(
-          cleanupLatex(von),
-          cleanupLatex(sub(vonrx, "", parts[1L])), cleanupLatex(parts[2L])
+          cleanup_latex(von),
+          cleanup_latex(sub(vonrx, "", parts[1L])),
+          cleanup_latex(parts[2L])
         )
       )
     }
@@ -152,13 +161,13 @@ make.bib.entry <- function(x) {
   }
 
   if ("author" %in% names(y)) {
-    y[["author"]] <- tryCatch(ArrangeAuthors(y[["author"]]), error = err.fun)
+    y[["author"]] <- tryCatch(arrange_authors(y[["author"]]), error = err.fun)
     if (is.null(y[["author"]])) {
       return()
     }
   }
   if ("editor" %in% names(y)) {
-    y[["editor"]] <- tryCatch(ArrangeAuthors(y[["editor"]]), error = err.fun)
+    y[["editor"]] <- tryCatch(arrange_authors(y[["editor"]]), error = err.fun)
     if (is.null(y[["editor"]])) {
       return()
     }
@@ -185,10 +194,19 @@ make.citation.list <- function(x) {
 }
 
 findBibFile <- function(package) {
-  if (package %in% c(
-    "base", "datasets", "graphics", "grDevices",
-    "methods", "stats", "stats4", "tools", "utils"
-  )
+  if (
+    package %in%
+      c(
+        "base",
+        "datasets",
+        "graphics",
+        "grDevices",
+        "methods",
+        "stats",
+        "stats4",
+        "tools",
+        "utils"
+      )
   ) {
     system.file("bib", sprintf("%s.bib", package), package = "bibtex")
   } else {
@@ -223,7 +241,9 @@ do_read_bib <- function(file, encoding = "unknown", srcfile) {
   }
 
   # Assess the extension of the file
-  if (!file.exists(file)) stop("Error: unable to open file to read")
+  if (!file.exists(file)) {
+    stop("Error: unable to open file to read")
+  }
 
   # Read all as UTF-8
   lines <- readLines(file, encoding = encoding, warn = FALSE)
@@ -239,7 +259,6 @@ do_read_bib <- function(file, encoding = "unknown", srcfile) {
   entry <- unlist(lapply(trimlines[init], function(x) {
     unlist(strsplit(x, "\\{"))[1]
   }))
-
 
   # Map fo document
   map_bib <- data.frame(
@@ -274,33 +293,35 @@ do_read_bib <- function(file, encoding = "unknown", srcfile) {
 
     stringlines <- unlist(stringlines)
 
-    map_string_end <- tryCatch(parse_strings(map_string, stringlines),
+    map_string_end <- tryCatch(
+      parse_strings(map_string, stringlines),
       warning = function(e) {
         NULL
       },
       error = function(e) {
-        stop("Error when parsing strings of ",
-          file,
-          call. = FALSE
-        )
+        stop("Error when parsing strings of ", file, call. = FALSE)
       }
     )
   } else {
     map_string_end <- NULL
   }
 
-
   # Select entries only, i.e. exclude preamble, comment and string
-  map_entries <- map_bib[!map_bib$entry_lower %in% c(
-    "@preamble",
-    "@string", "@comment"
-  ), ]
-
+  map_entries <- map_bib[
+    !map_bib$entry_lower %in%
+      c(
+        "@preamble",
+        "@string",
+        "@comment"
+      ),
+  ]
 
   # Parse single entry
   end <- lapply(seq_len(nrow(map_entries)), function(x) {
     parse_single_entry(
-      map_entries$init[x], map_entries$end[x], lines,
+      map_entries$init[x],
+      map_entries$end[x],
+      lines,
       map_string_end
     )
   })
@@ -349,11 +370,13 @@ do_read_bib <- function(file, encoding = "unknown", srcfile) {
 #' bib <- read.bib(package = "utils")
 #' }
 #' @export
-read.bib <- function(file = findBibFile(package),
-                     package = "bibtex",
-                     encoding = "unknown",
-                     header,
-                     footer) {
+read.bib <- function(
+  file = findBibFile(package),
+  package = "bibtex",
+  encoding = "unknown",
+  header,
+  footer
+) {
   if (!missing("header")) {
     message("'header' argument is deprecated.")
   }
@@ -377,7 +400,8 @@ read.bib <- function(file = findBibFile(package),
     ),
     error = function(e) {
       stop("Invalid bib file", call. = FALSE)
-    }, warning = function(w) {
+    },
+    warning = function(w) {
       if (any(grepl("syntax error, unexpected [$]end", w))) {
         NULL
       }
@@ -427,18 +451,25 @@ read.bib <- function(file = findBibFile(package),
 #' \dontshow{
 #' unlink(c("references.bib", "references2.bib"))
 #' }
-write.bib <- function(entry, file = "Rpackages.bib",
-                      append = FALSE, verbose = TRUE) {
+write.bib <- function(
+  entry,
+  file = "Rpackages.bib",
+  append = FALSE,
+  verbose = TRUE
+) {
   bibs <-
     if (inherits(entry, "bibentry")) {
       entry
     } else if (is.character(entry)) {
       if (length(entry) == 0) {
-        if (verbose) message("Empty package list: nothing to be done.")
+        if (verbose) {
+          message("Empty package list: nothing to be done.")
+        }
         return(invisible())
       }
       pkgs <- entry
-      if (is.null(pkgs)) { ## use all installed packages
+      if (is.null(pkgs)) {
+        ## use all installed packages
         pkgs <- unique(installed.packages()[, 1])
       }
       bibs <- sapply(pkgs, function(x) try(citation(x)), simplify = FALSE)
@@ -462,26 +493,40 @@ write.bib <- function(entry, file = "Rpackages.bib",
       bibs <- do.call("c", bibs)
       # formatting function for bibtex keys:
       # names with special characters must be enclosed in {}, others not.
-      bibs <- mapply(function(b, k) {
-        b$key <- k
-        b
-      }, bibs, pkgs, SIMPLIFY = FALSE)
+      bibs <- mapply(
+        function(b, k) {
+          b$key <- k
+          b
+        },
+        bibs,
+        pkgs,
+        SIMPLIFY = FALSE
+      )
       bibs <- do.call("c", bibs)
 
       if (verbose) {
         message(
           "Converted ",
-          n.converted, " of ", n.installed,
+          n.converted,
+          " of ",
+          n.installed,
           " package citations to BibTeX"
         )
       }
       bibs
     } else {
-      stop("Invalid argument 'entry': expected a bibentry object or a character vector of package names.")
+      stop(
+        paste0(
+          "Invalid argument 'entry': expected a bibentry object or a ",
+          "character vector of package names."
+        )
+      )
     }
 
   if (length(bibs) == 0) {
-    if (verbose) message("Empty bibentry list: nothing to be done.")
+    if (verbose) {
+      message("Empty bibentry list: nothing to be done.")
+    }
     return(invisible())
   }
 
@@ -489,7 +534,8 @@ write.bib <- function(entry, file = "Rpackages.bib",
   if (is.null(file)) {
     file <- stdout()
   } else if (is.character(file)) {
-    if (!grepl("\\.bib$", file)) { # add .bib extension if necessary
+    if (!grepl("\\.bib$", file)) {
+      # add .bib extension if necessary
       file <- paste(file, ".bib", sep = "")
     }
   }
@@ -497,14 +543,12 @@ write.bib <- function(entry, file = "Rpackages.bib",
   fh <- file(file, open = if (append) "a+" else "w+")
   on.exit(if (isOpen(fh)) close(fh))
   if (verbose) {
-    message("Writing ", length(bibs),
-      " Bibtex entries ... ",
-      appendLF = FALSE
-    )
+    message("Writing ", length(bibs), " Bibtex entries ... ", appendLF = FALSE)
   }
   writeLines(toBibtex(bibs), fh)
-  # writeLines(do.call("c", lapply(bibs, as.character)), fh)
-  if (verbose) message("OK\nResults written to file '", file, "'")
+  if (verbose) {
+    message("OK\nResults written to file '", file, "'")
+  }
 
   ## return Bibtex items invisibly
   invisible(bibs)

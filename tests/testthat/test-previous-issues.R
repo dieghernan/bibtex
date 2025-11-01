@@ -52,14 +52,11 @@ test_that("read.bib can use ? in key #9", {
   expect_identical(names(out2), "key?")
 })
 
-test_that(
-  "read.bib Ignores entry but does not stop with invalid author/editor #12",
-  {
-    f <- file.path(system.file("bib", "badFormat.bib", package = "bibtex"))
-    bib <- read.bib(f)
-    expect_true(length(bib) == 1L)
-  }
-)
+test_that("read.bib Ignores entry but does not stop with invalid ... #12", {
+  f <- file.path(system.file("bib", "badFormat.bib", package = "bibtex"))
+  bib <- read.bib(f)
+  expect_true(length(bib) == 1L)
+})
 
 
 test_that("make.bib.entry can generate year from date #15", {
@@ -79,7 +76,6 @@ test_that("windows and encoding #17", {
   auths <- out$author
 
   expect_s3_class(auths, "person", exact = TRUE)
-
 
   expect_identical(auths[[1]]$family, "Hermès International S.A.")
   expect_identical(auths[[2]]$family, "Katzfuß")
@@ -112,9 +108,12 @@ test_that("caught segfault read.bib() - macOS 10.14.6 #23", {
 test_that("Parse single entry from string #35", {
   # This test is about not reading from a file, but from a string
   my_ref <- " @book{McElreath_2020, edition={2},
-   title={Statistical Rethinking: A Bayesian Course with Examples in R and Stan}, ISBN={978-0-429-02960-8},
-   url={https://www.taylorfrancis.com/books/9780429642319}, DOI={10.1201/9780429029608},
-   publisher={Chapman and Hall/CRC}, author={McElreath, Richard}, year={2020}, month={Mar} }"
+   title={Statistical Rethinking: A Bayesian Course with Examples in R},
+   ISBN={978-0-429-02960-8},
+   url={https://www.taylorfrancis.com/books/9780429642319},
+   DOI={10.1201/9780429029608},
+   publisher={Chapman and Hall/CRC},
+  author={McElreath, Richard}, year={2020}, month={Mar} }"
 
   # Need to check by writing first
   tmp1 <- tempfile(fileext = ".bib")

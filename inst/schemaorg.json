@@ -1,0 +1,88 @@
+{
+  "@context": "https://schema.org",
+  "type": "SoftwareSourceCode",
+  "author": [
+    {
+      "id": "https://orcid.org/0000-0001-8457-4658",
+      "type": "Person",
+      "email": "diego.hernangomezherrero@gmail.com",
+      "familyName": "Hernangómez",
+      "givenName": "Diego"
+    },
+    {
+      "id": "https://orcid.org/0000-0002-2444-4226"
+    }
+  ],
+  "codeRepository": "https://github.com/ropensci/bibtex",
+  "contributor": [
+    {
+      "id": "https://orcid.org/0000-0003-2826-8458",
+      "type": "Person",
+      "email": "balamut2@illinois.edu",
+      "familyName": "Balamuta",
+      "givenName": [
+        "James",
+        "Joseph"
+      ]
+    },
+    {
+      "id": "https://orcid.org/0000-0003-1444-9135",
+      "type": "Person",
+      "email": "myrmecocystus@gmail.com",
+      "familyName": "Chamberlain",
+      "givenName": "Scott"
+    },
+    {
+      "id": "https://orcid.org/0000-0003-4198-9911",
+      "type": "Person",
+      "email": "Kurt.Hornik@R-project.org",
+      "familyName": "Hornik",
+      "givenName": "Kurt"
+    },
+    {
+      "type": "Person",
+      "email": "ripley@stats.ox.ac.uk",
+      "familyName": "Ripley",
+      "givenName": "Brian"
+    },
+    {
+      "type": "Person",
+      "email": "michael.koohafkan@gmail.com",
+      "familyName": "Koohafkan",
+      "givenName": "Michael"
+    },
+    {
+      "id": "https://orcid.org/0000-0002-7891-9645",
+      "type": "Person",
+      "email": "mathew.w.mclean@gmail.com",
+      "familyName": "McLean",
+      "givenName": [
+        "Mathew",
+        "W."
+      ]
+    }
+  ],
+  "copyrightHolder": {
+    "id": "https://orcid.org/0000-0002-2444-4226",
+    "type": "Person",
+    "email": "romain@purrple.cat",
+    "familyName": "Francois",
+    "givenName": "Romain"
+  },
+  "description": "Utility to parse a bibtex file.",
+  "license": "https://spdx.org/licenses/GPL-2.0",
+  "name": "bibtex: Bibtex Parser",
+  "programmingLanguage": {
+    "type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "provider": {
+    "id": "https://cran.r-project.org",
+    "type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "runtimePlatform": "R version 4.5.1 (2025-06-13 ucrt)",
+  "version": "0.5.1"
+}

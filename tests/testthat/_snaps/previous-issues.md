@@ -89,7 +89,7 @@
 
     @Book{McElreath_2020,
       edition = {2},
-      title = {Statistical Rethinking: A Bayesian Course with Examples in R and Stan},
+      title = {Statistical Rethinking: A Bayesian Course with Examples in R},
       isbn = {978-0-429-02960-8},
       url = {https://www.taylorfrancis.com/books/9780429642319},
       doi = {10.1201/9780429029608},

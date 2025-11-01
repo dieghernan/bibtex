@@ -1,0 +1,134 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "bibtex",
+  "description": "Utility to parse a bibtex file.",
+  "name": "bibtex: Bibtex Parser",
+  "relatedLink": ["https://docs.ropensci.org/bibtex/", "https://CRAN.R-project.org/package=bibtex"],
+  "codeRepository": "https://github.com/ropensci/bibtex",
+  "issueTracker": "https://github.com/ropensci/bibtex/issues",
+  "license": "https://spdx.org/licenses/GPL-2.0",
+  "version": "0.5.1",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.5.1 (2025-06-13 ucrt)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Romain",
+      "familyName": "Francois",
+      "email": "romain@purrple.cat",
+      "@id": "https://orcid.org/0000-0002-2444-4226"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Diego",
+      "familyName": "Hernangómez",
+      "email": "diego.hernangomezherrero@gmail.com",
+      "@id": "https://orcid.org/0000-0001-8457-4658"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": ["James", "Joseph"],
+      "familyName": "Balamuta",
+      "email": "balamut2@illinois.edu",
+      "@id": "https://orcid.org/0000-0003-2826-8458"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Scott",
+      "familyName": "Chamberlain",
+      "email": "myrmecocystus@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1444-9135"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Kurt",
+      "familyName": "Hornik",
+      "email": "Kurt.Hornik@R-project.org",
+      "@id": "https://orcid.org/0000-0003-4198-9911"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Brian",
+      "familyName": "Ripley",
+      "email": "ripley@stats.ox.ac.uk"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Michael",
+      "familyName": "Koohafkan",
+      "email": "michael.koohafkan@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": ["Mathew", "W."],
+      "familyName": "McLean",
+      "email": "mathew.w.mclean@gmail.com",
+      "@id": "https://orcid.org/0000-0002-7891-9645"
+    }
+  ],
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "Romain",
+      "familyName": "Francois",
+      "email": "romain@purrple.cat",
+      "@id": "https://orcid.org/0000-0002-2444-4226"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": ["James", "Joseph"],
+      "familyName": "Balamuta",
+      "email": "balamut2@illinois.edu",
+      "@id": "https://orcid.org/0000-0003-2826-8458"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 4.0.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    "SystemRequirements": null
+  },
+  "keywords": ["bibtex", "parser", "r"],
+  "fileSize": "333.856KB",
+  "releaseNotes": "https://github.com/ropensci/bibtex/blob/main/NEWS.md",
+  "readme": "https://github.com/ropensci/bibtex/blob/main/README.md",
+  "contIntegration": ["https://github.com/ropensci/bibtex/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/bibtex/branch/master"]
+}

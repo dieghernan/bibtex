@@ -1,4 +1,4 @@
-# bibtex
+  # bibtex <a href="https://docs.ropensci.org/bibtex/"><img src="man/figures/logo.png" align="right" height="139" alt="bibtex website" /></a>
 
 <!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/bibtex)](https://CRAN.R-project.org/package=bibtex) 
