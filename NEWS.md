@@ -4,6 +4,14 @@
 
 - Fixed `read.bib()` silently returning empty `bibentry()` when entries have trailing whitespace after closing brace ([#59](https://github.com/ropensci/bibtex/issues/59), [PR #60](https://github.com/ropensci/bibtex/pull/60)).
 
+## Testing
+
+- Added snapshot test variants for R-devel to handle `bibentry` formatting changes from `deparseLatex()` updates in R 4.6.0.
+
+## Documentation
+
+- Migrated `inst/NEWS.Rd` to `NEWS.md`.
+
 # bibtex 0.5.1
 
 ## Bug fix
