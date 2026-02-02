@@ -31,9 +31,13 @@ test_that("Read bibtex", {
 test_that("Read base", {
   bib <- read.bib(package = "base")
 
-  expect_snapshot_output(bib)
 
-  expect_snapshot_output(toBibtex(bib))
+  # bibentry formatting changed in R-devel (4.6.0) via deparseLatex math handling
+ is_r_devel <- grepl("devel", R.version$status, ignore.case = TRUE)
+
+  expect_snapshot_output(bib, variant = if (is_r_devel) "devel" else NULL)
+
+  expect_snapshot_output(toBibtex(bib), variant = if (is_r_devel) "devel" else NULL)
 })
 
 
