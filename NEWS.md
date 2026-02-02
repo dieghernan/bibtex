@@ -42,3 +42,22 @@
 
 - Switched CI from TravisCI to GitHub Actions. ([#29](https://github.com/ropensci/bibtex/pull/29))
 - Added a `pkgdown` site for the package. ([#29](https://github.com/ropensci/bibtex/pull/29))
+
+# bibtex 0.4.0
+
+- Removed the function `yy_fatal_error` which even though it was never actually called, triggered some R CMD check nuisance.
+- Removed useless dependency on Rcpp which bibtex no longer uses.
+- Added cite by key functionality to `read.bib` (pull request by Michael Koohafkan).
+
+# bibtex 0.3-5
+
+- Fix for bib files with no content.
+
+# bibtex 0.3-1
+
+- New function `write.bib` contributed by Renaud Gaujoux.
+- Missing `%` in error reporting in `read.bib` (fix provided by Renaud Gaujoux).
+
+# bibtex 0.3-0
+
+- Fixed long standing bug re backslashes.
