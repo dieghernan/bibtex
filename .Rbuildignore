@@ -14,3 +14,4 @@ revdep
 ^bibtex\.Rcheck$
 ^bibtex.*\.tar\.gz$
 ^bibtex.*\.tgz$
+^CRAN-SUBMISSION$
